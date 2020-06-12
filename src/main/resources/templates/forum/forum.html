@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>forum</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/forum/iconfont.css">
+    <link rel="stylesheet" href="/css/index/iconfont.css">
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.js"></script>
+    <script src="/webjars/jquery/3.4.1/dist/jquery.js"></script>
+    <script src="/js/outLogin/outLogin.js"></script>
+    <style>
+        body{
+            margin:0px;
+            padding:0px;
+            background:url(/img/background/forum.jpg) no-repeat fixed;
+            background-size:100% 100%;
+        }
+
+        header{
+            width:100%;
+            height:50px;
+            background-color:#7fdfff;
+        }
+        #daohang{
+            width:75%;
+            height:50px;
+            float:left;
+        }
+        #daohang a{
+            width:120px;
+            height:50px;
+            display:block;
+            line-height:50px;
+            text-align:center;
+            text-decoration:none;
+            color:white;
+        }
+        #daohang ul{
+            margin:0px;
+            padding:0px;
+            list-style-type:none;
+            width:120px;
+            float:left;
+        }
+        #daohang ul li{
+            width:100%;
+            height:50px;
+            display:none;
+            background:blue;
+            z-index:1000;
+            position:relative;
+        }
+        #denglu{
+            width:25%;
+            height:50px;
+            float:right;
+        }
+        #denglu a{
+            line-height:50px;
+            text-decoration:none;
+            color:white;
+        }
+
+        #modal-hideLogin {
+            visibility:hidden;
+            position:fixed;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+            z-index:1000;
+            background:rgba(0,0,0,0.6);
+        }
+        .modal-data{
+            width:400px;
+            margin:150px auto;
+            background-color:#FFFFFF;
+            border:1px solid #000;
+            border-radius:10px 10px 10px 10px;
+        }
+        .close{
+            width:30px;
+            height:30px;
+            float:right;
+        }
+        #modal-hideReg{
+            visibility:hidden;
+            position:fixed;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+            z-index:1000;
+            background:rgba(0,0,0,0.6);
+        }
+        .modal-data form{
+            width:80%;
+            height:80%;
+            margin:20px auto;
+            text-align:center;
+        }
+        .modal-data form span{
+            width:60px;
+            height:38px;
+        }
+        .modal-data form div{
+            padding-bottom:5px;
+        }
+
+        #main{
+            width:1110px;
+            margin:auto;
+            overflow-y:auto;
+            background:rgba(0,0,0,0.3);
+        }
+        #nav{
+            width:80px;
+            height:400px;
+            float:left;
+            margin-top:10px;
+        }
+        #show{
+            width:70px;
+            height:70px;
+            background:rgb(5,83,159);
+            border-radius:50%;
+            margin:auto;
+            cursor:pointer;
+        }
+        #show span{
+            display:block;
+            line-height:70px;
+            text-align:center;
+            color:white;
+        }
+        #nav ul{
+            width:70px;
+            margin:auto;
+            list-style:none;
+            padding:0px;
+        }
+        #nav li{
+            width:70px;
+            height:70px;
+            margin-top:5px;
+        }
+        #nav li div{
+            width:70px;
+            height:70px;
+            border-radius:50%;
+        }
+        #nav li img{
+            width:100%;
+            height:100%;
+            border-radius:10px;
+        }
+        #content{
+            width:1020px;
+            float:right;
+            margin-right:10px;
+        }
+        #content-head{
+            width:1015px;
+            height:200px;
+            border-radius:15px;
+            margin:10px 0px 0px 5px;
+            background:url(/img/background/forum_head.jpg) no-repeat;
+            background-size:100% 100%;
+        }
+        #content-left{
+            width:740px;
+            background:white;
+            border-radius:15px;
+            margin:10px 5px;
+            float:left;
+        }
+        #content-right{
+            width:270px;
+            background:white;
+            float:right;
+            margin-top:10px;
+            border-radius:15px;
+            padding:10px 0px;
+        }
+        #content-right h5{
+            padding-left:10px;
+        }
+        #content-right ul{
+            list-style:decimal;
+        }
+        #content-right a{
+            color:black;
+        }
+        #content-right a:hover{
+            text-decoration:none;
+        }
+        .post{
+            width:90%;
+            height:100px;
+            margin:5px auto 0px;
+            border-bottom:1px solid #DCDCDC;
+        }
+        .post a:hover{
+            text-decoration:none;
+        }
+        .post_title{
+            width:70%;
+            height:30px;
+            float:left;
+            font-weight:430;
+            font-size:22px;
+        }
+        .post_title a{
+            color:#000;
+        }
+        .post_master{
+            width:30%;
+            height:30px;
+            line-height:30px;
+            float:right;
+            font-size:14px;
+        }
+        .post_content{
+            width:70%;
+            height:50px;
+            font-weight:300;
+            font-size:15px;
+            float:left;
+        }
+        .post_date{
+            width:30%;
+            height:30px;
+            line-height:30px;
+            font-weight:300;
+            font-size:15px;
+            float:left;
+        }
+        #addPost{
+            width:90%;
+            height:250px;
+            margin:10px auto;
+            background:white;
+            border-top:1px solid #DCDCDC;
+        }
+        #addPost form{
+            width:90%;
+            margin:auto;
+            padding-top:20px;
+        }
+        #addPost form div{
+            margin-bottom:5px;
+        }
+        #submit-button{
+            width:100px;
+            float:left;
+        }
+        nav{
+            width:200px;
+            margin:auto;
+            margin-top:15px;
+        }
+        .clear{
+            clear:both;
+        }
+        #tip{
+            color:red;
+            float:left;
+            padding-left:10px;
+            line-height:38px;
+        }
+        footer{
+            width:100%;
+            padding:50px 0px;
+            background:#739abb;
+        }
+        footer a{
+            color:black;
+        }
+        footer a:hover{
+            text-decoration:none;
+        }
+        footer span{
+            margin-right:20px;
+        }
+    </style>
+</head>
+<header>
+    <div id="daohang">
+        <ul>
+            <a href="/index">首页</a>
+            <li><a href="javascript:void(0)">1</a></li>
+            <li><a href="javascript:void(0)">2</a></li>
+            <li><a href="javascript:void(0)">3</a></li>
+            <li><a href="javascript:void(0)">4</a></li>
+        </ul>
+        <ul>
+            <a href="javascript:void(0)">首页2</a>
+            <li><a href="javascript:void(0)">5</a></li>
+            <li><a href="javascript:void(0)">6</a></li>
+            <li><a href="javascript:void(0)">7</a></li>
+            <li><a href="javascript:void(0)">8</a></li>
+            <li><a href="javascript:void(0)">9</a></li>
+            <li><a href="javascript:void(0)">0</a></li>
+        </ul>
+        <ul>
+            <a href="javascript:void(0)">首页3</a>
+            <li><a href="javascript:void(0)">0</a></li>
+            <li><a href="javascript:void(0)">7</a></li>
+            <li><a href="javascript:void(0)">8</a></li>
+            <li><a href="javascript:void(0)">9</a></li>
+            <li><a href="javascript:void(0)">0</a></li>
+        </ul>
+        <ul>
+            <a href="/ForumModel/forum">论坛</a>
+        </ul>
+    </div>
+    <div id="denglu">
+        <div th:switch="${session.user} eq null">
+            <div th:case="true">
+                <a href="javascript:void(0)" id="login" onclick="hideLogin()">登录</a>
+                <a href="javascript:void(0)" id="register" style="border-left:2px solid white" onclick="hideReg()">&nbsp;注册</a>
+            </div>
+            <div th:case="false">
+                <div style="width:50px;height:50px;float:left;margin-right:5px;">
+                    <img th:src="${session.user.user_head}" style="width:50px;height:50px;">
+                </div>
+                <a href="/UserModel/userInfo" th:text="${session.user.user_name}"></a>
+                <a class="outLogin" href="javascript:void(0)">退出</a>
+            </div>
+        </div>
+
+        <div id="modal-hideLogin" style="visibility: hidden;">
+            <div class="modal-data">
+                <button class="close" type="button" onclick="hideLogin()">
+                    <span >&times;</span>
+                </button>
+                <form>
+                    <div class="form-group">
+                        <h3>登录框</h3>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="iconfont icon-zhanghao"></span>
+                        </div>
+                        <input type="text" class="form-control" id="lg_loginName" name="loginName" placeholder="账号">
+                    </div>
+                    <p id="lg1"></p>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="iconfont icon-mima"></span>
+                        </div>
+                        <input type="text" class="form-control" id="lg_password" name="password" placeholder="密码">
+                    </div>
+                    <p id="lg2"></p>
+
+                    <button id="login-button" type="submit" class="btn btn-primary" style="width:100px;">登录</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-hideReg" style="visibility: hidden;">
+            <div class="modal-data">
+                <button class="close" type="button" onclick="hideReg()">
+                    <span >&times;</span>
+                </button>
+                <form action="/UserModel/register">
+                    <div class="form-group">
+                        <h3>注册框</h3>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="iconfont icon-zhanghao"></span>
+                        </div>
+                        <input type="text" class="form-control" id="reg_loginName" name="loginName" placeholder="账号">
+                    </div>
+                    <p id="reg1"></p>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="iconfont icon-mima"></span>
+                        </div>
+                        <input type="text" class="form-control" id="reg_password" name="password" placeholder="密码">
+                    </div>
+                    <p id="reg2"></p>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="iconfont icon-iconset0137"></span>
+                        </div>
+                        <input type="text" class="form-control" id="user_name" name="userName" placeholder="昵称">
+                    </div>
+                    <p id="reg3"></p>
+
+                    <button id="reg_button" type="submit" class="btn btn-primary" style="width:100px;">注册</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+<script type="text/javascript">
+        var header = document.getElementsByTagName("header");
+        var daohangs = document.getElementById("daohang");
+        var hideUl = daohangs.getElementsByTagName("ul");
+        for(var i = 0;i < hideUl.length;i++){
+            daohang(i);
+        }
+        function daohang(index){
+            hideUl[index].onmouseout = function(){
+                var a = hideUl[index].getElementsByTagName("a");
+                a[0].style.background = "";
+                a[0].style.color = "white";
+                var li = hideUl[index].getElementsByTagName("li");
+                for(var j = 0;j < li.length;j++){
+                    li[j].style.display = "none";
+                    var b = li[j];
+                    b.index = j;
+                    b.onmouseout = function(){
+                        li[this.index].style.background = "blue";
+                        li[this.index].getElementsByTagName("a")[0].style.color  = "white";
+                    }
+                }
+            }
+            hideUl[index].onmouseover = function(){
+                var a = hideUl[index].getElementsByTagName("a");
+                a[0].style.background = "rgb(255,255,255)";
+                a[0].style.color = "black";
+                var li = hideUl[index].getElementsByTagName("li");
+                for(var j = 0;j < li.length;j++){
+                    li[j].style.display = "block";
+                    var b = li[j];
+                    b.index = j;
+                    b.onmouseover = function(){
+                        li[this.index].style.background = "white";
+                        li[this.index].getElementsByTagName("a")[0].style.color = "black";
+                    }
+                }
+            }
+        }
+
+        function hideLogin(){
+            var e1 = document.getElementById('modal-hideLogin');
+            e1.style.visibility = (e1.style.visibility == "visible")? "hidden" : "visible";
+        }
+        function hideReg(){
+            var e1 = document.getElementById('modal-hideReg');
+            e1.style.visibility = (e1.style.visibility == "visible")? "hidden" : "visible";
+        }
+
+        $("#login-button").click(function(){
+            var loginName = $("#lg_loginName").val();
+            var password = $("#lg_password").val();
+            if(loginName == "" || loginName == null){
+                $("#lg_loginName").focus();
+                $("#lg1").css("color","red");
+                $("#lg1").html("账号不能为空");
+                return false;
+            }else if(password == "" || password == null){
+                $("#lg_password").focus();
+                $("#lg2").css("color","red");
+                $("#lg2").html("密码不能为空");
+                $("#lg1").html("");
+                return false;
+            }else{
+                var result;
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    dataType:"json",
+                    url:"/UserModel/login",
+                    data:{"loginName":loginName,"password":password},
+                    success:function(data){
+                        if(data == true){
+                            window.location.reload();
+                            result = false;
+                        }else{
+                            $("#lg2").css("color","red");
+                            $("#lg2").html("密码错误！");
+                            result = false;
+                        }
+                    },
+                    error:function(data){
+                        $("#lg2").css("color","red");
+                        $("#lg2").html("账号或密码错误！");
+                        result = false;
+                     }
+                 });
+                 return result;
+            }
+        })
+
+        $("#reg_button").click(function(){
+            var loginName = $("#reg_loginName").val();
+            var password = $("#reg_password").val();
+            var userName = $("#user_name").val();
+            if(loginName == "" || loginName == null){
+                $("#reg_loginName").focus();
+                $("#reg1").css("color","red");
+                $("#reg1").html("账号不能为空");
+                return false;
+            }else if(password == "" || password == null){
+                $("#reg_password").focus();
+                $("#reg2").css("color","red");
+                $("#reg2").html("密码不能为空");
+                $("#reg1").html("");
+                return false;
+            }else if(password.length>12 || password.length<6){
+                $("#reg2").css("color","red");
+                $("#reg2").html("密码长度在6-12之间");
+                return false;
+            }else if(userName == "" || userName == null){
+                $("#user_name").focus();
+                $("#reg3").css("color","red");
+                $("#reg3").html("昵称不能为空");
+                return false;
+            }else{
+                var result;
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    dataType:"json",
+                    url:"/UserModel/check",
+                    data:{"loginName":loginName},
+                    success:function(data){
+                        if(data == true){
+                            $("#reg1").css("color","red");
+                            $("#reg1").html("已被注册！");
+                            result = false;
+                        }else{
+                            result = true;
+                        }
+                    },
+                    error:function(data){
+                        result = false;
+                    }
+                });
+                return result;
+            }
+        })
+    </script>
+<body>
+    <div id="main">
+        <div id="nav">
+            <div id="show">
+                <span class="iconfont icon-cha"></span>
+            </div>
+            <ul>
+                <li>
+                    <a href="#">
+                        <div>
+                            <img src="/img/icon/csgo_icon.jpg">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div>
+                            <img src="/img/icon/dota2_icon.jpg">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div>
+                            <img src="/img/icon/Mario_icon.jpg">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div>
+                            <img src="/img/icon/HearthStone_icon.jpg">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div>
+                            <img src="/img/icon/TheWitcher3_icon.jpg">
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="content">
+            <div id="content-head"></div>
+            <div id="content-left">
+                <div class="post" th:each="post:${posts}">
+                    <div class="post_title">
+                        <a th:href="@{/ForumModel/post(postId=${post.post_id})}" th:text="${post.post_title}"></a>
+                    </div>
+                    <div class="post_master">
+                        <a th:href="@{/UserModel/userInfo(postMaster=${post.post_master})}" th:text="${post.user_name}"></a>
+                    </div>
+                    <div class="post_content" th:text="${post.post_content}"></div>
+                    <div class="post_date" th:text="${#dates.format(post.post_date, 'yyyy-MM-dd HH:mm:ss')}"></div>
+                    <div th:if="${session != null ? session.state : ''} eq '1'">
+                        <a class="delPost" href="javaScript:void(0)">删除</a>
+                        <div class="postId" th:text="${post.post_id}" hidden></div>
+                    </div>
+                </div>
+
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item" th:if="${PageInfo != null ? PageInfo.pageNum : ''} ne '1'">
+                            <a class="page-link" th:href="@{/ForumModel/forum(Page=${PageInfo != null ? PageInfo.pageNum-1 : ''})}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:if="${PageInfo != null ? PageInfo.pageNum : ''} ne '1'">
+                            <a class="page-link" th:href="@{/ForumModel/forum(Page=${PageInfo != null ? PageInfo.pageNum-1 : ''})}" aria-label="Previous">
+                                <span aria-hidden="true" th:text="${PageInfo != null ? PageInfo.pageNum-1 : ''}"></span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="" th:text="${PageInfo != null ? PageInfo.pageNum : ''}"></a></li>
+                        <li class="page-item" th:if="${PageInfo != null ? PageInfo.hasNextPage : ''}">
+                            <a class="page-link" th:href="@{/ForumModel/forum(Page=${PageInfo != null ? PageInfo.pageNum+1 : ''})}" aria-label="Next">
+                                <span aria-hidden="true" th:text="${PageInfo != null ? PageInfo.pageNum+1 : ''}"></span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:if="${PageInfo != null ? PageInfo.hasNextPage : ''}">
+                            <a class="page-link" th:href="@{/ForumModel/forum(Page=${PageInfo != null ? PageInfo.pageNum+1 : ''})}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div id="addPost">
+                    <form>
+                        <div>
+                            <input type="text" class="form-control" id="post_title" name="postTitle" placeholder="在这里输入标题">
+                        </div>
+                        <div>
+                            <textarea class="form-control" id="post_content" name="postContent" rows="5" placeholder="在这里输入内容"></textarea>
+                        </div>
+                        <div th:switch="${session.user} ne null">
+                            <div th:case="true">
+                                <button id="submit-button" type="submit" class="btn btn-primary">发表</button>
+                                <p id="tip"></p>
+                            </div>
+                            <div th:case="false">
+                                <button class="btn btn-secondary" disabled>请登录</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="content-right">
+                <h5>热门推荐</h5>
+                <ul>
+                    <li th:each="posts:${postList}" th:if="${postsStat.count}<=10">
+                        <a th:href="@{/ForumModel/post(postId=${posts.post_id})}" th:text="${posts.post_title}"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <script>
+            $("#submit-button").click(function(){
+                var postTitle = $("#post_title").val();
+                var postContent = $("#post_content").val();
+                if(postTitle == "" || postTitle == null){
+                    $("#tip").html("标题不能为空");
+                    return false;
+                }else if(postContent == "" || postContent == null){
+                    $("#tip").html("内容不能为空");
+                    return false;
+                }else{
+                    var result;
+                    $.ajax({
+                        async: false,
+                        type: "POST",
+                        dataType:"json",
+                        url:"/ForumModel/addPost",
+                        data:{"postTitle":postTitle,"postContent":postContent},
+                        success:function(data){
+                            if(data == true){
+                                window.location.reload();
+                                result = false;
+                            }else{
+                                result = false;
+                            }
+                        },
+                        error:function(data){
+                            result = false;
+                         }
+                     });
+                     return result;
+                }
+            })
+
+            $(".delPost").click(function(){
+                var postId = $(this).next(".postId").html();
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    dataType:"json",
+                    url:"/ForumModel/delPost",
+                    data:{"postId":postId},
+                    success:function(data){
+                        if(data == true){
+                            window.location.reload();
+                        }else{
+                            alert("遇到bug了，请联系管理员。");
+                        }
+                    },
+                    error:function(data){
+                        alert("遇到bug了，请联系管理员。");
+                    }
+                })
+            })
+
+            var navHeight = $("#nav").offset().top;
+            var contentRightHeight = $("#content-right").offset().top;
+
+            $(window).scroll(function(){
+                var scroHeight = $(this).scrollTop();
+                if(scroHeight > navHeight){
+                    $("#nav").css({"position":"fixed","top": 0 });
+                }else if(scroHeight < navHeight){
+                    $("#nav").css("position","static");
+                }
+            })
+
+            $(window).scroll(function(){
+                var scroHeight = $(this).scrollTop();
+                if(scroHeight > contentRightHeight){
+                    $("#content-right").css({"position":"fixed","top": 0,"margin-left":"750px"});
+                }else if(scroHeight < contentRightHeight){
+                    $("#content-right").css({"position":"","top":"","margin-left":""});
+                }
+            })
+
+            var current = 0;
+
+            $("#show").click(function(){
+                current = (current+45)%360;
+                $("#nav ul").stop(true).slideToggle(800);
+                $("#show span").css("transform","rotate("+current+"deg)");
+            })
+        </script>
+    </div>
+</body>
+<footer>
+    <div style="width:800px;margin:auto;">
+        <div>制做人：梁嘉辉</div>
+        <span><a href="#">友情链接</a></span>
+        <span><a href="#">关于我们</a></span>
+        <span><a href="#">加入我们</a></span>
+        <span><a href="#">联系我们</a></span>
+    </div>
+</footer>
+</html>

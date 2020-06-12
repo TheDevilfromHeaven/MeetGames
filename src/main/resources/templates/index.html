@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <link rel="stylesheet" href="/css/index/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.css">
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.js"></script>
+    <script src="/webjars/jquery/3.4.1/dist/jquery.js"></script>
+    <style>
+        body{
+            margin:0px;
+            padding:0px;
+        }
+        header{
+            width:100%;
+            height:50px;
+            background-color:#7fdfff;
+        }
+        #daohang{
+            width:75%;
+            height:50px;
+            float:left;
+        }
+        #daohang a{
+            width:120px;
+            height:50px;
+            display:block;
+            line-height:50px;
+            text-align:center;
+            text-decoration:none;
+            color:white;
+        }
+        #daohang ul{
+            margin:0px;
+            padding:0px;
+            list-style-type:none;
+            width:120px;
+            float:left;
+        }
+        #daohang ul li{
+            width:100%;
+            height:50px;
+            display:none;
+            background:blue;
+            z-index:1000;
+            position:relative;
+        }
+        #denglu{
+            width:25%;
+            height:50px;
+            float:right;
+        }
+        #denglu a{
+            line-height:50px;
+            text-decoration:none;
+            color:white;
+        }
+
+        #modal-hideLogin {
+            visibility:hidden;
+            position:fixed;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+            z-index:1000;
+            background:rgba(0,0,0,0.6);
+        }
+        .modal-data{
+            width:400px;
+            margin:150px auto;
+            background-color:#FFFFFF;
+            border:1px solid #000;
+            border-radius:10px 10px 10px 10px;
+        }
+        .close{
+            width:30px;
+            height:30px;
+            float:right;
+        }
+        #modal-hideReg{
+            visibility:hidden;
+            position:fixed;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+            z-index:1000;
+            background:rgba(0,0,0,0.6);
+        }
+        form{
+            width:80%;
+            height:80%;
+            margin:20px auto;
+            text-align:center;
+        }
+        form span{
+            width:60px;
+            height:38px;
+        }
+        form div{
+            padding-bottom:5px;
+        }
+
+        #main{
+            width:100%;
+        }
+        #lunbo-background{
+            background:url(/img/background/lunbo_background.jpg) no-repeat;
+            background-size:100% 100%;
+            padding-bottom:50px;
+        }
+        #lunbo{
+            width:1020px;
+            height:380px;
+            margin:auto;
+            padding-top:50px;
+        }
+        #left-button{
+            float:left;
+            width:50px;
+            height:100px;
+            margin:125px 5px 0px 0px;
+            text-align:center;
+            cursor:pointer;
+            background:#1e272e;
+            line-height:100px;
+            color:white;
+        }
+        #left-button span{
+            font-size:40px;
+        }
+        #right-button{
+            float:right;
+            width:50px;
+            height:100px;
+            margin:125px 0px 0px 5px;
+            text-align:center;
+            cursor:pointer;
+            background:#1e272e;
+            line-height:100px;
+            color:white;
+        }
+        #right-button span{
+            font-size:40px;
+        }
+        .lunbo-show{
+            width:910px;
+            height:350px;
+            float:left;
+            background:#1e272e;
+        }
+        .main-stage{
+            width:550px;
+            height:350px;
+            float:left;
+        }
+        .main-stage img{
+            width:100%;
+            height:100%;
+        }
+        .sub-stage{
+            width:360px;
+            height:350px;
+            float:right;
+        }
+        .sub-stage a{
+            color:white;
+            font-size:25px;
+            margin:15px;
+            line-height:45px;
+        }
+        .sub-stage a:hover{
+            text-decoration:none;
+        }
+        .sub-stage span{
+            color:white;
+            margin:10px;
+        }
+        #lunbo-bottom{
+            width:100%;
+            height:15px;
+            float:left;
+            margin:5px 0px;
+        }
+        #lunbo-bottom ul{
+            margin:0px auto;
+            padding:0px;
+            height:15px;
+            list-style-type:none;
+        }
+        #lunbo-bottom ul li{
+            width:20px;
+            height:15px;
+            float:left;
+            margin:0px 2px;
+            border-radius:3px;
+            background:#535c68;
+            cursor:pointer;
+        }
+        .game-img{
+            width:355px;
+            height:230px;
+            list-style-type:none;
+            margin:0px;
+            padding:0px;
+        }
+        .game-img li{
+            width:175px;
+            height:115px;
+            float:left;
+            opacity:0.5;
+            margin-right:1px;
+        }
+        .game-img img{
+            width:170px;
+            height:110px;
+            margin:3px 0px 0px 5px;
+        }
+
+        #paihangbang-background{
+            background:#52b0b9;
+            padding:50px 0px 20px 0px;
+        }
+        #paihangbang{
+            width:800px;
+            height:752px;
+            margin:auto;
+        }
+        #paihangbang-left{
+            width:480px;
+            float:left;
+        }
+        #paihangbang-right{
+            width:320px;
+            background:#c8d6e5;
+            float:right;
+        }
+        .paihangbang-title{
+            height:80px;
+            margin:0px 0px 4px 0px;
+            text-decoration:none;
+            background:#417082;
+            color:white;
+        }
+        .paihangbang-title img{
+            width:130px;
+            height:80px;
+            float:left;
+        }
+        .paihangbang-show{
+            width:300px;
+            height:100%;
+            margin:auto;
+            display:none;
+        }
+        .paihangbang-show a{
+            color:black;
+            font-size:23px;
+            line-height:40px;
+        }
+        .paihangbang-show a:hover{
+            text-decoration:none;
+        }
+        .paihangbang-show-img{
+            width:290px;
+            margin:auto;
+        }
+        .paihangbang-show-img img{
+            width:290px;
+            height:170px;
+            margin:4px auto;
+        }
+        .paihangbang-a:hover{
+            text-decoration:none;
+        }
+        .game-info{
+            width:250px;
+            float:left;
+        }
+        .game-info span{
+            margin:10px;
+            line-height:30px;
+        }
+        .game-price{
+            float:right;
+        }
+        .game-price span{
+            margin:15px;
+            line-height:80px;
+        }
+
+        #games-background{
+            background:rgb(135,158,236);
+            padding:20px 0px 15px 0px;
+        }
+        #games{
+            width:1300px;
+            margin:auto;
+        }
+        .game{
+            width:150px;
+            height:250px;
+            float:left;
+            margin:0px 6px 5px 6px;
+            color:black;
+            font-size:15px;
+            background:powderblue;
+        }
+        .game img{
+            width:150px;
+            height:200px;
+        }
+        .tip{
+            clear:both;
+            text-align:center;
+        }
+        #games-head{
+            width:100%;
+            height:50px;
+            margin-bottom:5px;
+            border-bottom:2px solid #dfe6e9;
+        }
+        .search-area{
+            width:280px;
+            float:right;
+        }
+        #games-title{
+            float:left;
+        }
+        .sorry{
+            width:250px;
+            margin:20px auto;
+        }
+        .game:hover{
+            background:white;
+        }
+        .game span{
+            float:right;
+            margin:0px 5px;
+        }
+        footer{
+            width:100%;
+            padding:50px 0px;
+            background:#739abb;
+        }
+        footer a{
+            color:black;
+        }
+        footer a:hover{
+            text-decoration:none;
+        }
+        footer span{
+            margin-right:20px;
+        }
+    </style>
+</head>
+<body>
+<div id="loading">
+    <h3 style="margin-top:300px;text-align:center">请稍等。。。</h3>
+</div>
+<script>
+    var loading = document.getElementById("loading");
+    loading.style.width = window.innerWidth + 'px';
+    loading.style.height = window.innerHeight + 'px';
+    loading.style.position = "fixed";
+    loading.style.background = "white";
+    loading.style.zIndex = "1000";
+    loading.style.top = "0";
+
+    window.onload = function(){
+        loading.remove();
+    }
+</script>
+<header>
+    <div id="daohang">
+        <ul>
+            <a href="/index">首页</a>
+            <li><a href="javascript:void(0)">1</a></li>
+            <li><a href="javascript:void(0)">2</a></li>
+            <li><a href="javascript:void(0)">3</a></li>
+            <li><a href="javascript:void(0)">4</a></li>
+        </ul>
+        <ul>
+            <a href="javascript:void(0)">首页2</a>
+            <li><a href="javascript:void(0)">5</a></li>
+            <li><a href="javascript:void(0)">6</a></li>
+            <li><a href="javascript:void(0)">7</a></li>
+            <li><a href="javascript:void(0)">8</a></li>
+            <li><a href="javascript:void(0)">9</a></li>
+            <li><a href="javascript:void(0)">0</a></li>
+        </ul>
+        <ul>
+            <a href="javascript:void(0)">首页3</a>
+            <li><a href="javascript:void(0)">0</a></li>
+            <li><a href="javascript:void(0)">7</a></li>
+            <li><a href="javascript:void(0)">8</a></li>
+            <li><a href="javascript:void(0)">9</a></li>
+            <li><a href="javascript:void(0)">0</a></li>
+        </ul>
+        <ul>
+            <a href="/ForumModel/forum">论坛</a>
+        </ul>
+    </div>
+    <div id="denglu">
+        <div th:switch="${session.user} eq null">
+            <div th:case="true">
+                <a href="javascript:void(0)" id="login" onclick="hideLogin()">登录</a>
+                <a href="javascript:void(0)" id="register" style="border-left:2px solid white" onclick="hideReg()">&nbsp;注册</a>
+            </div>
+            <div th:case="false">
+                <div style="width:50px;height:50px;float:left;margin-right:5px;">
+                    <img th:src="${session.user.user_head}" style="width:50px;height:50px;">
+                </div>
+                <a href="/UserModel/userInfo" th:text="${session.user.user_name}"></a>
+                <a href="/UserModel/outLogin">退出</a>
+            </div>
+        </div>
+
+        <div id="modal-hideLogin" style="visibility: hidden;">
+            <div class="modal-data">
+                <button class="close" type="button" onclick="hideLogin()">
+                    <span >&times;</span>
+                </button>
+                <form>
+                    <div class="form-group">
+                        <h3>登录框</h3>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="iconfont icon-zhanghao"></span>
+                        </div>
+                        <input type="text" class="form-control" id="lg_loginName" name="loginName" placeholder="账号">
+                    </div>
+                    <p id="lg1"></p>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="iconfont icon-mima"></span>
+                        </div>
+                        <input type="text" class="form-control" id="lg_password" name="password" placeholder="密码">
+                    </div>
+                    <p id="lg2"></p>
+
+                    <button id="login-button" type="submit" class="btn btn-primary" style="width:100px;">登录</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-hideReg" style="visibility: hidden;">
+            <div class="modal-data">
+                <button class="close" type="button" onclick="hideReg()">
+                    <span >&times;</span>
+                </button>
+                <form action="/UserModel/register">
+                    <div class="form-group">
+                        <h3>注册框</h3>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="iconfont icon-zhanghao"></span>
+                        </div>
+                        <input type="text" class="form-control" id="reg_loginName" name="loginName" placeholder="账号">
+                    </div>
+                    <p id="reg1"></p>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="iconfont icon-mima"></span>
+                        </div>
+                        <input type="text" class="form-control" id="reg_password" name="password" placeholder="密码">
+                    </div>
+                    <p id="reg2"></p>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="iconfont icon-iconset0137"></span>
+                        </div>
+                        <input type="text" class="form-control" id="user_name" name="userName" placeholder="昵称">
+                    </div>
+                    <p id="reg3"></p>
+
+                    <button id="reg_button" type="submit" class="btn btn-primary" style="width:100px;">注册</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+<script type="text/javascript">
+        var header = document.getElementsByTagName("header");
+        var daohangs = document.getElementById("daohang");
+        var hideUl = daohangs.getElementsByTagName("ul");
+        for(var i = 0;i < hideUl.length;i++){
+            daohang(i);
+        }
+        function daohang(index){
+            hideUl[index].onmouseout = function(){
+                var a = hideUl[index].getElementsByTagName("a");
+                a[0].style.background = "";
+                a[0].style.color = "white";
+                var li = hideUl[index].getElementsByTagName("li");
+                for(var j = 0;j < li.length;j++){
+                    li[j].style.display = "none";
+                    var b = li[j];
+                    b.index = j;
+                    b.onmouseout = function(){
+                        li[this.index].style.background = "blue";
+                        li[this.index].getElementsByTagName("a")[0].style.color  = "white";
+                    }
+                }
+            }
+            hideUl[index].onmouseover = function(){
+                var a = hideUl[index].getElementsByTagName("a");
+                a[0].style.background = "rgb(255,255,255)";
+                a[0].style.color = "black";
+                var li = hideUl[index].getElementsByTagName("li");
+                for(var j = 0;j < li.length;j++){
+                    li[j].style.display = "block";
+                    var b = li[j];
+                    b.index = j;
+                    b.onmouseover = function(){
+                        li[this.index].style.background = "white";
+                        li[this.index].getElementsByTagName("a")[0].style.color = "black";
+                    }
+                }
+            }
+        }
+
+        function hideLogin(){
+            var e1 = document.getElementById('modal-hideLogin');
+            e1.style.visibility = (e1.style.visibility == "visible")? "hidden" : "visible";
+        }
+        function hideReg(){
+            var e1 = document.getElementById('modal-hideReg');
+            e1.style.visibility = (e1.style.visibility == "visible")? "hidden" : "visible";
+        }
+
+        $("#login-button").click(function(){
+            var loginName = $("#lg_loginName").val();
+            var password = $("#lg_password").val();
+            if(loginName == "" || loginName == null){
+                $("#lg_loginName").focus();
+                $("#lg1").css("color","red");
+                $("#lg1").html("账号不能为空");
+                return false;
+            }else if(password == "" || password == null){
+                $("#lg_password").focus();
+                $("#lg2").css("color","red");
+                $("#lg2").html("密码不能为空");
+                $("#lg1").html("");
+                return false;
+            }else{
+                var result;
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    dataType:"json",
+                    url:"/UserModel/login",
+                    data:{"loginName":loginName,"password":password},
+                    success:function(data){
+                        if(data == true){
+                            window.location.reload();
+                            result = false;
+                        }else{
+                            $("#lg2").css("color","red");
+                            $("#lg2").html("密码错误！");
+                            result = false;
+                        }
+                    },
+                    error:function(data){
+                        $("#lg2").css("color","red");
+                        $("#lg2").html("账号或密码错误！");
+                        result = false;
+                     }
+                 });
+                 return result;
+            }
+        })
+
+        $("#reg_button").click(function(){
+            var loginName = $("#reg_loginName").val();
+            var password = $("#reg_password").val();
+            var userName = $("#user_name").val();
+            if(loginName == "" || loginName == null){
+                $("#reg_loginName").focus();
+                $("#reg1").css("color","red");
+                $("#reg1").html("账号不能为空");
+                return false;
+            }else if(password == "" || password == null){
+                $("#reg_password").focus();
+                $("#reg2").css("color","red");
+                $("#reg2").html("密码不能为空");
+                $("#reg1").html("");
+                return false;
+            }else if(password.length>12 || password.length<6){
+                $("#reg2").css("color","red");
+                $("#reg2").html("密码长度在6-12之间");
+                return false;
+            }else if(userName == "" || userName == null){
+                $("#user_name").focus();
+                $("#reg3").css("color","red");
+                $("#reg3").html("昵称不能为空");
+                return false;
+            }else{
+                var result;
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    dataType:"json",
+                    url:"/UserModel/check",
+                    data:{"loginName":loginName},
+                    success:function(data){
+                        if(data == true){
+                            $("#reg1").css("color","red");
+                            $("#reg1").html("已被注册！");
+                            result = false;
+                        }else{
+                            result = true;
+                        }
+                    },
+                    error:function(data){
+                        result = false;
+                    }
+                });
+                return result;
+            }
+        })
+    </script>
+<div id="main">
+    <div id="lunbo-background">
+        <div id="lunbo" >
+            <div id="left-button">
+                <span class="iconfont icon-arrow-left-"></span>
+            </div>
+            <div class="lunbo-show" th:each="games,gamesStat:${gamesList}" th:if="${gamesStat.count}<=6">
+                <div class="main-stage">
+                    <img th:src="${games.game_img_title}">
+                </div>
+                <div class="sub-stage">
+                    <a th:href="@{/GamesModel/gameInfo(gameId=${games.game_id})}" th:text="${games.game_name}"></a>
+                    <ul class="game-img">
+                        <li><img th:src="${games.game_img1_src}"></li>
+                        <li><img th:src="${games.game_img2_src}"></li>
+                        <li><img th:src="${games.game_img3_src}"></li>
+                        <li><img th:src="${games.game_img4_src}"></li>
+                    </ul>
+                    <span style="float:left" th:text="${games.game_price}"></span>
+                    <span style="float:right" th:text="${games.game_platform}"></span>
+                </div>
+            </div>
+            <div id="right-button">
+                <span class="iconfont icon-arrow-right-"></span>
+            </div>
+            <div id="lunbo-bottom">
+                <ul id="index"></ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        var x = 0;
+        var show = document.getElementsByClassName("lunbo-show");
+        var index = document.getElementById("index");
+
+        $(".lunbo-show:gt(0)").hide();
+
+        for(var i=0;i < show.length;i++){
+            index.appendChild(document.createElement("li"));
+        }
+        $("#index li:eq(0)").css("background","#686de0");
+
+        var li = $("#index li:first").outerWidth(true);
+        index.style.width = (li * show.length) + "px";
+
+        $("#left-button").hover(function(){
+            $("#left-button").css("background","#82ccdd");
+        },function(){
+            $("#left-button").css("background","#1e272e");
+        })
+
+        $("#right-button").hover(function(){
+            $("#right-button").css("background","#82ccdd");
+        },function(){
+            $("#right-button").css("background","#1e272e");
+        })
+
+        $("#right-button").click(function(){
+            $(".lunbo-show").hide();
+            $("#index li").css("background","#535c68");
+            x += 1;
+            if(x > show.length-1){
+                x = 0;
+            }
+            $(".lunbo-show:eq(" + x + ")").show();
+            $("#index li:eq(" + x + ")").css("background","#686de0");
+        })
+
+        $("#left-button").click(function(){
+            $(".lunbo-show").hide();
+            $("#index li").css("background","#535c68");
+            x -= 1;
+            if(x < 0){
+                x = show.length-1;
+            }
+            $(".lunbo-show:eq("+ x +")").show();
+            $("#index li:eq(" + x + ")").css("background","#686de0");
+        })
+
+        $("#index li").click(function(){
+            x = $(this).index();
+            $(".lunbo-show").hide();
+            $("#index li").css("background","#535c68");
+            $(".lunbo-show:eq("+ x +")").show();
+            $("#index li:eq(" + x + ")").css("background","#686de0");
+        })
+
+        var x;
+
+        $(".lunbo-show").hover(function(){
+            x = $(this).index() - 1;
+        },function(){
+        })
+
+        $(".game-img li").hover(function(){
+            $(this).css("opacity","1");
+            $(this).find("img").clone().appendTo(".main-stage:eq("+ x +")");
+            $(".main-stage:eq("+ x +")").find("img:first").hide();
+        },function(){
+            $(this).css("opacity","0.6");
+            $(".main-stage:eq("+ x +")").find("img:eq(1)").remove();
+            $(".main-stage:eq("+ x +")").find("img:first").show();
+        })
+    </script>
+
+    <div id="paihangbang-background">
+        <div id="paihangbang">
+            <div id="paihangbang-left">
+                <div style="margin-top:-41px">
+                    <h3>排行榜</h3>
+                </div>
+                <a class="paihangbang-a" th:href="@{/GamesModel/gameInfo(gameId=${games.game_id})}" th:each="games,gamesStat:${gamesList}" th:if="${gamesStat.count}<=9">
+                    <div class="paihangbang-title">
+                        <img th:src="${games.game_img_title}">
+                        <div class="game-info">
+                            <span th:text="${games.game_name}"></span><br>
+                            <span th:text="${games.game_platform}"></span>
+                        </div>
+                        <div class="game-price">
+                            <span th:text="${games.game_price}"></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div id="paihangbang-right">
+                <div class="paihangbang-show" th:each="games,gamesStat:${gamesList}" th:if="${gamesStat.count}<=9">
+                    <a th:href="@{/GamesModel/gameInfo(gameId=${games.game_id})}" th:text="${games.game_name}"></a>
+                    <div class="paihangbang-show-img">
+                        <img th:src="${games.game_img1_src}">
+                        <img th:src="${games.game_img2_src}">
+                        <img th:src="${games.game_img3_src}">
+                        <img th:src="${games.game_img4_src}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(".paihangbang-show:first").show();
+        $(".paihangbang-title:first").css({"background":"#c8d6e5","color":"black"});
+
+        $(".paihangbang-a").hover(function(){
+            $(".paihangbang-show").hide();
+            var x = $(this).index() - 1;
+            $(".paihangbang-title").css({"background":"","color":"white"});
+            $(".paihangbang-title:eq(" + x + ")").css({"background":"#c8d6e5","color":"black"});
+            $(".paihangbang-show:eq(" + x + ")").show();
+        })
+    </script>
+
+    <div id="games-background">
+        <div id="games">
+            <div id="games-head">
+                <div id="games-title"><h2>游戏中心</h2></div>
+                <div class="search-area input-group">
+                    <input id="search" class="form-control" type="text" placeholder="在这里输入关键词">
+                    <div class="input-group-append">
+                        <button id="search-botton" class="btn btn-primary" type="button">搜索</button>
+                    </div>
+                </div>
+            </div>
+            <div id="game_show"></div>
+            <div class="tip">下滑查看更多</div>
+        </div>
+    </div>
+    <script>
+        var page = 1;
+        var end = 0;
+        var gameName = "";
+
+        window.ready = getGames();
+
+        $(window).scroll(function() {
+            if($(document).scrollTop() >= $(document).height() - $(window).height()) {
+                if(end == 0){
+                    page += 1;
+                    getGames();
+                }
+            }
+        });
+
+        function getGames(){
+            $.ajax({
+                async: false,
+                dataType:"json",
+                url:"/GamesModel/gamesCenter",
+                data:{"Page":page,"gameName":gameName},
+                success:function(data){
+                    var con = "";
+                    if(data != null && data != ""){
+                        $("#game_show").append("<div class=page"+page+"><div>");
+                        $.each(data,function(index,item){
+                            con += "<a href="+"/GamesModel/gameInfo?gameId="+item.game_id+"><div class="+"game"+"><img src="+item.game_img_mini+"><div>"+item.game_name+"</div><span>"+item.game_price+"</span></div></a>";
+                        });
+                        $(".page"+page+"").html(con);
+                        $(".tip").html("下滑查看更多");
+                    }else{
+                        var search = $("#game_show div").html();
+                        if(search == null){
+                            $("#game_show").append("<div class=sorry>抱歉你搜索的游戏目前还没有收录<div>");
+                        }
+                        $(".tip").html("已经没有了。。。");
+                        end = 1;
+                    }
+                },
+                error:function(data){
+                }
+            });
+        }
+
+        $("#search-botton").click(function(){
+            gameName = $("#search").val();
+            $("#game_show div").remove();
+            page = 1;
+            end = 0;
+            getGames();
+        })
+    </script>
+</div>
+</body>
+<footer>
+    <div style="width:800px;margin:auto;">
+        <div>制做人：梁嘉辉</div>
+        <span><a href="#">友情链接</a></span>
+        <span><a href="#">关于我们</a></span>
+        <span><a href="#">加入我们</a></span>
+        <span><a href="#">联系我们</a></span>
+    </div>
+</footer>
+</html>

@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>userInfo</title>
+    <link rel="stylesheet" href="/css/user/iconfont.css">
+    <link rel="stylesheet" href="/css/index/iconfont.css">
+    <link rel="stylesheet" href="/webjars/laydate/src/theme/default/laydate.css">
+    <link rel="stylesheet" type="text/css" href="/webjars/github-com-fntneves-jquery-labelauty/1.1.0/source/jquery-labelauty.css">
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.css">
+    <script src="/webjars/jquery/3.4.1/dist/jquery.js"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.js"></script>
+    <script src="/webjars/github-com-fntneves-jquery-labelauty/1.1.0/source/jquery-labelauty.js"></script>
+    <script src="/webjars/laydate/src/laydate.js"></script>
+    <script src="/js/outLogin/outLogin.js"></script>
+    <style>
+        body{
+            margin:0px;
+            padding:0px;
+        }
+
+        header{
+            width:100%;
+            height:50px;
+            background-color:#7fdfff;
+        }
+        #daohang{
+            width:75%;
+            height:50px;
+            float:left;
+        }
+        #daohang a{
+            width:120px;
+            height:50px;
+            display:block;
+            line-height:50px;
+            text-align:center;
+            text-decoration:none;
+            color:white;
+        }
+        #daohang ul{
+            margin:0px;
+            padding:0px;
+            list-style-type:none;
+            width:120px;
+            float:left;
+        }
+        #daohang ul li{
+            width:100%;
+            height:50px;
+            display:none;
+            background:blue;
+            z-index:1000;
+            position:relative;
+        }
+        #denglu{
+            width:25%;
+            height:50px;
+            float:right;
+        }
+        #denglu a{
+            line-height:50px;
+            text-decoration:none;
+            color:white;
+        }
+
+        #modal-hideLogin{
+            visibility:hidden;
+            position:fixed;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+            z-index:1000;
+            background:rgba(0,0,0,0.6);
+        }
+        .modal-data{
+            width:400px;
+            margin:150px auto;
+            background-color:#FFFFFF;
+            border:1px solid #000;
+            border-radius:10px 10px 10px 10px;
+        }
+        .denglu-close{
+            width:30px;
+            height:30px;
+            float:right;
+        }
+        #modal-hideReg{
+            visibility:hidden;
+            position:fixed;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+            z-index:1000;
+            background:rgba(0,0,0,0.6);
+        }
+        .modal-data form{
+            width:80%;
+            height:80%;
+            margin:20px auto;
+            text-align:center;
+        }
+        .modal-data form span{
+            width:60px;
+            height:38px;
+        }
+        .modal-data form div{
+            padding-bottom:5px;
+        }
+
+        #main{
+            width:1000px;
+            margin:auto;
+        }
+        #main-head{
+            margin:20px 0px;
+            border-bottom:2px solid black;
+        }
+        #main-head h2{
+            padding-left:70px;
+        }
+        #nav{
+            width:200px;
+            height:600px;
+            float:left;
+            margin:0px 30px;
+        }
+        #nav ul{
+            margin:0px;
+            padding:0px;
+            list-style-type:none;
+        }
+        #nav ul li{
+            width:200px;
+            height:80px;
+            font-size:18px;
+            line-height:80px;
+            text-align:center;
+        }
+        #nav ul li a{
+            color:black;
+        }
+        #nav ul li a:hover{
+            text-decoration:none;
+        }
+        #display{
+            width:700px;
+            float:left;
+        }
+        #user-head img{
+            width:100%;
+            height:100%;
+        }
+        #userInfo-form{
+            width:300px;
+            margin:20px 20px 20px 60px;
+            text-align:center;
+            float:left;
+        }
+        #userInfo-form div{
+            margin-bottom:10px;
+        }
+        .title{
+            width:75px;
+            line-height:38px;
+            text-align:right;
+            padding-right:5px;
+        }
+        #sex label{
+            float:left;
+            margin:0px 15px 0px 0px;
+        }
+        #birthday{
+            height:38px;
+        }
+        #tip{
+            width:300px;
+            float:left;
+        }
+        #tip_name{
+            margin-top:25px;
+            width:250px;
+            position:absolute;
+        }
+        #tip_email{
+            margin-top:200px;
+            width:250px;
+            position:absolute;
+        }
+        #change-button{
+            width:100px;
+            margin:auto;
+        }
+        #headImg{
+            padding-left:100px;
+        }
+        #user-head{
+            width:200px;
+            height:200px;
+        }
+        #file div{
+            margin-top:5px;
+        }
+        #file-button{
+            width:100px;
+            margin-left:50px;
+        }
+        .wish{
+            width:270px;
+            height:170px;
+            float:left;
+            background:burlywood;
+            margin:5px 10px;
+        }
+        .wish-img{
+            width:120px;
+            height:160px;
+            float:left;
+            margin:5px;
+        }
+        .wish-img img{
+            width:100%;
+            height:100%;
+        }
+        .wish a:hover{
+            text-decoration:none;
+        }
+        .removeWish{
+            color:red;
+        }
+        .wishNone{
+            margin-top:20px;
+            text-align:center;
+        }
+        .postNone{
+            margin:100px;
+            text-align:center;
+        }
+        #myPost a{
+            color:black;
+        }
+        #myPost a:hover{
+            text-decoration:none;
+        }
+        .modal-body span{
+            width:70px;
+            line-height:38px;
+        }
+        #updateIntroduction{
+            height:100px;
+            text-align:justify;
+        }
+        nav{
+            width:200px;
+            margin:auto;
+        }
+        td{
+            line-height:41px;
+        }
+        footer{
+            width:100%;
+            padding:50px 0px;
+            background:#739abb;
+        }
+        footer a{
+            color:black;
+        }
+        footer a:hover{
+            text-decoration:none;
+        }
+        footer span{
+            margin-right:20px;
+        }
+    </style>
+</head>
+<div id="loading">
+    <h3 style="margin-top:300px;text-align:center">请稍等。。。</h3>
+</div>
+<script>
+    var loading = document.getElementById("loading");
+    loading.style.width = window.innerWidth + 'px';
+    loading.style.height = window.innerHeight + 'px';
+    loading.style.position = "fixed";
+    loading.style.background = "white";
+    loading.style.zIndex = "1000";
+    loading.style.top = "0";
+
+    window.onload = function(){
+        loading.remove();
+    }
+</script>
+<header>
+    <div id="daohang">
+        <ul>
+            <a href="/index">首页</a>
+            <li><a href="javascript:void(0)">1</a></li>
+            <li><a href="javascript:void(0)">2</a></li>
+            <li><a href="javascript:void(0)">3</a></li>
+            <li><a href="javascript:void(0)">4</a></li>
+        </ul>
+        <ul>
+            <a href="javascript:void(0)">首页2</a>
+            <li><a href="javascript:void(0)">5</a></li>
+            <li><a href="javascript:void(0)">6</a></li>
+            <li><a href="javascript:void(0)">7</a></li>
+            <li><a href="javascript:void(0)">8</a></li>
+            <li><a href="javascript:void(0)">9</a></li>
+            <li><a href="javascript:void(0)">0</a></li>
+        </ul>
+        <ul>
+            <a href="javascript:void(0)">首页3</a>
+            <li><a href="javascript:void(0)">0</a></li>
+            <li><a href="javascript:void(0)">7</a></li>
+            <li><a href="javascript:void(0)">8</a></li>
+            <li><a href="javascript:void(0)">9</a></li>
+            <li><a href="javascript:void(0)">0</a></li>
+        </ul>
+        <ul>
+            <a href="/ForumModel/forum">论坛</a>
+        </ul>
+    </div>
+    <div id="denglu">
+        <div th:switch="${session.user} eq null">
+            <div th:case="true">
+                <a href="javascript:void(0)" id="login" onclick="hideLogin()">登录</a>
+                <a href="javascript:void(0)" id="register" style="border-left:2px solid white" onclick="hideReg()">&nbsp;注册</a>
+            </div>
+            <div th:case="false">
+                <div style="width:50px;height:50px;float:left;margin-right:5px;">
+                    <img th:src="${session.user.user_head}" style="width:50px;height:50px;">
+                </div>
+                <a href="/UserModel/userInfo" th:text="${session.user.user_name}"></a>
+                <a class="outLogin" href="javascript:void(0)">退出</a>
+            </div>
+        </div>
+
+        <div id="modal-hideLogin" style="visibility: hidden;">
+            <div class="modal-data">
+                <button class="denglu-close" type="button" onclick="hideLogin()">
+                    <span >&times;</span>
+                </button>
+                <form>
+                    <div class="form-group">
+                        <h3>登录框</h3>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="iconfont icon-zhanghao"></span>
+                        </div>
+                        <input type="text" class="form-control" id="lg_loginName" name="loginName" placeholder="账号">
+                    </div>
+                    <p id="lg1"></p>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="iconfont icon-mima"></span>
+                        </div>
+                        <input type="text" class="form-control" id="lg_password" name="password" placeholder="密码">
+                    </div>
+                    <p id="lg2"></p>
+
+                    <button id="login-button" type="submit" class="btn btn-primary" style="width:100px;">登录</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-hideReg" style="visibility: hidden;">
+            <div class="modal-data">
+                <button class="denglu-close" type="button" onclick="hideReg()">
+                    <span >&times;</span>
+                </button>
+                <form action="/UserModel/register">
+                    <div class="form-group">
+                        <h3>注册框</h3>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="iconfont icon-zhanghao"></span>
+                        </div>
+                        <input type="text" class="form-control" id="reg_loginName" name="loginName" placeholder="账号">
+                    </div>
+                    <p id="reg1"></p>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="iconfont icon-mima"></span>
+                        </div>
+                        <input type="text" class="form-control" id="reg_password" name="password" placeholder="密码">
+                    </div>
+                    <p id="reg2"></p>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="iconfont icon-iconset0137"></span>
+                        </div>
+                        <input type="text" class="form-control" id="user_name" name="userName" placeholder="昵称">
+                    </div>
+                    <p id="reg3"></p>
+
+                    <button id="reg_button" type="submit" class="btn btn-primary" style="width:100px;">注册</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+<script type="text/javascript">
+        var header = document.getElementsByTagName("header");
+        var daohangs = document.getElementById("daohang");
+        var hideUl = daohangs.getElementsByTagName("ul");
+        for(var i = 0;i < hideUl.length;i++){
+            daohang(i);
+        }
+        function daohang(index){
+            hideUl[index].onmouseout = function(){
+                var a = hideUl[index].getElementsByTagName("a");
+                a[0].style.background = "";
+                a[0].style.color = "white";
+                var li = hideUl[index].getElementsByTagName("li");
+                for(var j = 0;j < li.length;j++){
+                    li[j].style.display = "none";
+                    var b = li[j];
+                    b.index = j;
+                    b.onmouseout = function(){
+                        li[this.index].style.background = "blue";
+                        li[this.index].getElementsByTagName("a")[0].style.color  = "white";
+                    }
+                }
+            }
+            hideUl[index].onmouseover = function(){
+                var a = hideUl[index].getElementsByTagName("a");
+                a[0].style.background = "rgb(255,255,255)";
+                a[0].style.color = "black";
+                var li = hideUl[index].getElementsByTagName("li");
+                for(var j = 0;j < li.length;j++){
+                    li[j].style.display = "block";
+                    var b = li[j];
+                    b.index = j;
+                    b.onmouseover = function(){
+                        li[this.index].style.background = "white";
+                        li[this.index].getElementsByTagName("a")[0].style.color = "black";
+                    }
+                }
+            }
+        }
+
+        function hideLogin(){
+            var e1 = document.getElementById('modal-hideLogin');
+            e1.style.visibility = (e1.style.visibility == "visible")? "hidden" : "visible";
+        }
+        function hideReg(){
+            var e1 = document.getElementById('modal-hideReg');
+            e1.style.visibility = (e1.style.visibility == "visible")? "hidden" : "visible";
+        }
+
+        $("#login-button").click(function(){
+            var loginName = $("#lg_loginName").val();
+            var password = $("#lg_password").val();
+            if(loginName == "" || loginName == null){
+                $("#lg_loginName").focus();
+                $("#lg1").css("color","red");
+                $("#lg1").html("账号不能为空");
+                return false;
+            }else if(password == "" || password == null){
+                $("#lg_password").focus();
+                $("#lg2").css("color","red");
+                $("#lg2").html("密码不能为空");
+                $("#lg1").html("");
+                return false;
+            }else{
+                var result;
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    dataType:"json",
+                    url:"/UserModel/login",
+                    data:{"loginName":loginName,"password":password},
+                    success:function(data){
+                        if(data == true){
+                            window.location.reload();
+                            result = false;
+                        }else{
+                            $("#lg2").css("color","red");
+                            $("#lg2").html("密码错误！");
+                            result = false;
+                        }
+                    },
+                    error:function(data){
+                        $("#lg2").css("color","red");
+                        $("#lg2").html("账号或密码错误！");
+                        result = false;
+                     }
+                 });
+                 return result;
+            }
+        })
+
+        $("#reg_button").click(function(){
+            var loginName = $("#reg_loginName").val();
+            var password = $("#reg_password").val();
+            var userName = $("#user_name").val();
+            if(loginName == "" || loginName == null){
+                $("#reg_loginName").focus();
+                $("#reg1").css("color","red");
+                $("#reg1").html("账号不能为空");
+                return false;
+            }else if(password == "" || password == null){
+                $("#reg_password").focus();
+                $("#reg2").css("color","red");
+                $("#reg2").html("密码不能为空");
+                $("#reg1").html("");
+                return false;
+            }else if(password.length>12 || password.length<6){
+                $("#reg2").css("color","red");
+                $("#reg2").html("密码长度在6-12之间");
+                return false;
+            }else if(userName == "" || userName == null){
+                $("#user_name").focus();
+                $("#reg3").css("color","red");
+                $("#reg3").html("昵称不能为空");
+                return false;
+            }else{
+                var result;
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    dataType:"json",
+                    url:"/UserModel/check",
+                    data:{"loginName":loginName},
+                    success:function(data){
+                        if(data == true){
+                            $("#reg1").css("color","red");
+                            $("#reg1").html("已被注册！");
+                            result = false;
+                        }else{
+                            result = true;
+                        }
+                    },
+                    error:function(data){
+                        result = false;
+                    }
+                });
+                return result;
+            }
+        })
+    </script>
+<body>
+    <div id="main">
+        <div id="main-head">
+            <h2>个人中心</h2>
+        </div>
+        <div id="main-body">
+            <div id="nav">
+                <ul id="nav-list">
+                    <li>
+                        <span class="iconfont icon-wodeziliao"></span>
+                        <a href="/UserModel/userInfo">我的资料</a>
+                    </li>
+                    <li>
+                        <span class="iconfont icon-icon25"></span>
+                        <a href="/UserModel/userInfo/headImg">我的头像</a>
+                    </li>
+                    <li>
+                        <span class="iconfont icon-xing"></span>
+                        <a href="/UserModel/userInfo/wishList">愿望列表</a>
+                    </li>
+                    <li>
+                        <span class="iconfont icon-wofadetiezi"></span>
+                        <a href="/UserModel/userInfo/myPost">我的帖子</a>
+                    </li>
+                    <li th:switch="${session.state} eq 1" th:case="true">
+                        <span class="iconfont icon-airudiantubiaohuizhi-zhuanqu_youxi"></span>
+                        <a href="/UserModel/userInfo/gameManager">游戏管理</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="display">
+                <div id="userInfo">
+                    <div id="userInfo-form">
+                        <form>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="title">昵称:</span>
+                                </div>
+                                <input type="text" class="form-control" id="userName" name="user_name" th:value="${userInfo != null ? userInfo.user_name : ''}">
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="title">性别:</span>
+                                </div>
+                                <div id="sex">
+                                    <input id="man" type="radio" name="radio-input" data-labelauty="男"/>
+                                    <input id="woman" type="radio" name="radio-input" data-labelauty="女"/>
+                                    <input id="secret" type="radio" name="radio-input" data-labelauty="保密"/>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="title">生日:</span>
+                                </div>
+                                <input type="text" class="form-control" id="birthday" name="birthday" th:value="${userInfo != null ? userInfo.birthday : ''}" onfocus=this.blur()>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="title">电子邮箱:</span>
+                                </div>
+                                <input type="text" class="form-control" id="email" name="email" th:value="${userInfo != null ? userInfo.email : ''}">
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="title">个性签名:</span>
+                                </div>
+                                <textarea class="form-control" cow="3" id="autograph" name="autograph" th:text="${userInfo != null ? userInfo.autograph : ''}"></textarea>
+                            </div>
+                            <button id="change-button" type="submit" class="btn btn-primary">修改</button>
+                        </form>
+                    </div>
+                    <div id="tip">
+                        <p id="tip_name"></p>
+                        <p id="tip_email"></p>
+                    </div>
+                </div>
+
+                <div id="headImg">
+                    <div id="user-head">
+                        <img th:src="${userInfo != null ? userInfo.user_head : ''}" alt="图片丢失啦">
+                    </div>
+                    <div id="file">
+                        <form action="/FileUpLoadModel/uploadHead" method="post" enctype="multipart/form-data">
+                            <div>
+                                <input type="file" name="file">
+                            </div>
+                            <div>
+                                <input id="file-button" class="btn btn-primary" type="submit" value="上传">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="wishList">
+                    <div class="wish" th:each="wish,wishStat:${wishList}">
+                        <span class="game_id" th:text="${wish.game_id}" hidden></span>
+                        <div class="wish-img">
+                            <img th:src="${wish != null ? wish.game_img_mini : ''}">
+                        </div>
+                        <a class="wish-title" th:href="@{/GamesModel/gameInfo(gameId=${wish.game_id})}" th:text="${wish != null ? wish.game_name : ''}"></a>
+                        <div class="create-date" th:text="${#dates.format(wish.create_date, 'yyyy-MM-dd HH:mm')}"></div>
+                        <a class="removeWish" href="javaScript:void(0)">移出列表</a>
+                    </div>
+                </div>
+
+                <div id="myPost">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>标题</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="post,postStat:${posts}">
+                            <td style="width:400px;">
+                                <a th:href="@{/ForumModel/post(postId=${post.post_id})}" th:text="${post.post_title}"></a>
+                            </td>
+                            <td>
+                                <button class="delPost btn btn-danger">删除</button>
+                                <div class="postId" th:text="${post.post_id}" hidden></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="postNone" th:if="${PageInfo != null ? PageInfo.total : ''} eq '0'">快去发个帖子吧</div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item" th:if="${PageInfo != null ? PageInfo.pageNum : ''} ne '1'">
+                                <a class="page-link" th:href="@{/UserModel/userInfo/myPost(Page=${PageInfo != null ? PageInfo.pageNum-1 : ''})}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item" th:if="${PageInfo != null ? PageInfo.pageNum : ''} ne '1'">
+                                <a class="page-link" th:href="@{/UserModel/userInfo/myPost(Page=${PageInfo != null ? PageInfo.pageNum-1 : ''})}" aria-label="Previous">
+                                    <span aria-hidden="true" th:text="${PageInfo != null ? PageInfo.pageNum-1 : ''}"></span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="" th:text="${PageInfo != null ? PageInfo.pageNum : ''}"></a></li>
+                            <li class="page-item" th:if="${PageInfo != null ? PageInfo.hasNextPage : ''}">
+                                <a class="page-link" th:href="@{/UserModel/userInfo/myPost(Page=${PageInfo != null ? PageInfo.pageNum+1 : ''})}" aria-label="Next">
+                                    <span aria-hidden="true" th:text="${PageInfo != null ? PageInfo.pageNum+1 : ''}"></span>
+                                </a>
+                            </li>
+                            <li class="page-item" th:if="${PageInfo != null ? PageInfo.hasNextPage : ''}">
+                                <a class="page-link" th:href="@{/UserModel/userInfo/myPost(Page=${PageInfo != null ? PageInfo.pageNum+1 : ''})}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div id="gameManager">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>游戏名</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="game,gameStat:${games}">
+                                <td th:text="${game.game_name}" style="width:400px;"></td>
+                                <td>
+                                    <button class="update btn btn-success" data-toggle="modal" data-target="#updateGameInfo">修改</button>
+                                    <button class="delete btn btn-danger">删除</button>
+                                    <div class="gameId" th:text="${game.game_id}" hidden></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item" th:if="${PageInfo != null ? PageInfo.pageNum : ''} ne '1'">
+                                <a class="page-link" th:href="@{/UserModel/userInfo/gameManager(Page=${PageInfo != null ? PageInfo.pageNum-1 : ''})}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item" th:if="${PageInfo != null ? PageInfo.pageNum : ''} ne '1'">
+                                <a class="page-link" th:href="@{/UserModel/userInfo/gameManager(Page=${PageInfo != null ? PageInfo.pageNum-1 : ''})}" aria-label="Previous">
+                                    <span aria-hidden="true" th:text="${PageInfo != null ? PageInfo.pageNum-1 : ''}"></span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="" th:text="${PageInfo != null ? PageInfo.pageNum : ''}"></a></li>
+                            <li class="page-item" th:if="${PageInfo != null ? PageInfo.hasNextPage : ''}">
+                                <a class="page-link" th:href="@{/UserModel/userInfo/gameManager(Page=${PageInfo != null ? PageInfo.pageNum+1 : ''})}" aria-label="Next">
+                                    <span aria-hidden="true" th:text="${PageInfo != null ? PageInfo.pageNum+1 : ''}"></span>
+                                </a>
+                            </li>
+                            <li class="page-item" th:if="${PageInfo != null ? PageInfo.hasNextPage : ''}">
+                                <a class="page-link" th:href="@{/UserModel/userInfo/gameManager(Page=${PageInfo != null ? PageInfo.pageNum+1 : ''})}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div class="modal fade" id="updateGameInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalScrollableTitle">修改</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                </div>
+                                <div class="modal-footer">
+                                    <button id="save" type="button" class="btn btn-primary">保存</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="clear" style="clear:both"></div>
+        </div>
+    </div>
+    <script th:inline="javaScript">
+        var type = [[${type}]];
+        var sex = [[${userInfo != null ? userInfo.sex : ""}]];
+        var wish = [[${wishList}]];
+
+        $("#display").hide();
+
+        if(type == "userInfo"){
+            $("#nav-list li:first").css("background","rgb(86,177,230)");
+            $("#nav-list li:first a").css("color","white");
+            $("#nav-list li:first span").css("color","white");
+            $("#display").children("div:not([id='userInfo'])").remove();
+            $("#display").show();
+        }else if(type == "headImg"){
+            $("#nav-list li:eq(1)").css("background","rgb(86,177,230)");
+            $("#nav-list li:eq(1) a").css("color","white");
+            $("#nav-list li:eq(1) span").css("color","white");
+            $("#display").children("div:not([id='headImg'])").remove();
+            $("#display").show();
+        }else if(type == "wishList"){
+            $("#nav-list li:eq(2)").css("background","rgb(86,177,230)");
+            $("#nav-list li:eq(2) a").css("color","white");
+            $("#nav-list li:eq(2) span").css("color","white");
+            $("#display").children("div:not([id='wishList'])").remove();
+            $("#display").show();
+        }else if(type == "myPost"){
+            $("#nav-list li:eq(3)").css("background","rgb(86,177,230)");
+            $("#nav-list li:eq(3) a").css("color","white");
+            $("#nav-list li:eq(3) span").css("color","white");
+            $("#display").children("div:not([id='myPost'])").remove();
+            $("#display").show();
+        }else if(type == "gameManager"){
+            $("#nav-list li:eq(4)").css("background","rgb(86,177,230)");
+            $("#nav-list li:eq(4) a").css("color","white");
+            $("#nav-list li:eq(4) span").css("color","white");
+            $("#display").children("div:not([id='gameManager'])").remove();
+            $("#display").show();
+        }
+
+        $("#change-button").click(function(){
+            var user_name = $("#userName").val();
+            var birthday = $("#birthday").val();
+            var email = $("#email").val();
+            var autograph = $("#autograph").val();
+            var check_email = /\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/;
+            if(user_name == "" || user_name == null){
+                $("#tip_name").css("color","red");
+                $("#tip_name").html("昵称不能为空！");
+                return false;
+            }else if(email != ''){
+                if(!email.match(check_email)){
+                    $("#tip_email").css("color","red");
+                    $("#tip_email").html("你输入的邮箱格式是错误的！");
+                    return false;
+                }
+		    }else{
+                var result;
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    dataType:"json",
+                    url:"/UserModel/changeInfo",
+                    data:{"user_name":user_name,"sex":sex,"birthday":birthday,"email":email,"autograph":autograph},
+                    success:function(data){
+                        if(data == true){
+                            window.location.reload();
+                            result = false;
+                        }else{
+                            result = false;
+                        }
+                    },
+                    error:function(data){
+                        result = false;
+                    }
+                });
+                return result;
+            }
+        })
+
+        $(".removeWish").click(function(){
+            var game_id = $(this).parent().find(".game_id").html();
+            var index = $(this).parent().index();
+            $.ajax({
+                async: false,
+                type: "POST",
+                dataType:"json",
+                url:"/WishModel/removeWish",
+                data:{"gameId":game_id},
+                success:function(data){
+                    if(data == true){
+                        $(".wish:eq("+index+")").remove();
+                    }else{
+                        alert("遇到bug了，请联系管理员。");
+                    }
+                },
+                error:function(data){
+                    alert("遇到bug了，请联系管理员。");
+                }
+            })
+        })
+
+        var selectGameId;
+        $(".update").click(function(){
+            selectGameId = $(this).parent().find(".gameId").html();
+            $.ajax({
+                async: false,
+                type: "POST",
+                dataType:"json",
+                url:"/GamesModel/findGame",
+                data:{"gameId":selectGameId},
+                success:function(data){
+                    var con = "";
+                    if(data != null && data != ""){
+                        con = "<form>"
+                              + "<div class="+"input-group"+" style=margin-bottom:5px>"
+                              + "<div class="+"input-group-prepend"+">"
+                              + "<span>游戏名:</span>"
+                              + "</div>"
+                              + "<input type="+"text"+" class="+"form-control"+" id="+"updateGameName"+" value="+data.game_name+">"
+                              + "</div>"
+                              + "<div class="+"input-group"+">"
+                              + "<div class="+"input-group-prepend"+">"
+                              + "<span>游戏简介:</span>"
+                              + "</div>"
+                              + "<textarea class="+"form-control"+" id="+"updateIntroduction"+" cow=8>"+data.introduction+"</textarea>"
+                              + "</div>"
+                              + "</form>";
+                        $(".modal-body").html(con);
+                    }else{
+                        alert("遇到bug了，请联系管理员。");
+                    }
+                },
+                error:function(data){
+                    alert("遇到bug了，请联系管理员。");
+                }
+            })
+        })
+
+        $("#save").click(function(){
+            var updateGameName = $("#updateGameName").val();
+            var updateIntroduction = $("#updateIntroduction").val();
+            $.ajax({
+                async: false,
+                type: "POST",
+                dataType:"json",
+                url:"/GamesModel/updateGameInfo",
+                data:{"gameId":selectGameId,"gameName":updateGameName,"introduction":updateIntroduction},
+                success:function(data){
+                    if(data == true){
+                        window.location.reload();
+                    }else{
+                        alert("遇到bug了，请联系管理员。");
+                    }
+                },
+                error:function(data){
+                    alert("遇到bug了，请联系管理员。");
+                }
+            })
+        })
+
+        $(".delete").click(function(){
+            selectGameId = $(this).parent().find(".gameId").html();
+            $.ajax({
+                async: false,
+                type: "POST",
+                dataType:"json",
+                url:"/GamesModel/deleteGame",
+                data:{"gameId":selectGameId},
+                success:function(data){
+                    if(data == true){
+                        window.location.reload();
+                    }else{
+                        alert("遇到bug了，请联系管理员。");
+                    }
+                },
+                error:function(data){
+                    alert("遇到bug了，请联系管理员。");
+                }
+            })
+        })
+
+        $(".delPost").click(function(){
+            var postId = $(this).next(".postId").html();
+            $.ajax({
+                async: false,
+                type: "POST",
+                dataType:"json",
+                url:"/ForumModel/delPost",
+                data:{"postId":postId},
+                success:function(data){
+                    if(data == true){
+                        window.location.reload();
+                    }else{
+                        alert("遇到bug了，请联系管理员。");
+                    }
+                },
+                error:function(data){
+                    alert("遇到bug了，请联系管理员。");
+                }
+            })
+        })
+
+        $(document).ready(function(){
+			$(":radio").labelauty();
+		});
+
+		if(sex == "男"){
+		    $("#man").attr("checked","checked");
+		}else if(sex == "女"){
+		    $("#woman").attr("checked","checked");
+		}else if(sex == null || sex == "保密"){
+		    $("#secret").attr("checked","checked");
+		}
+
+		$("#man").click(function(){
+		    sex = "男";
+		})
+
+		$("#woman").click(function(){
+		    sex = "女";
+		})
+
+		$("#secret").click(function(){
+		    sex = "保密";
+		})
+
+        laydate.render({
+            elem: '#birthday' //指定元素
+        });
+
+        if(wish != null && wish.length == 0){
+            $("#wishList").append("<div class=wishNone>你还没有添加游戏，赶紧去添加吧<div>")
+        }
+    </script>
+</body>
+<footer>
+    <div style="width:800px;margin:auto;">
+        <div>制做人：梁嘉辉</div>
+        <span><a href="#">友情链接</a></span>
+        <span><a href="#">关于我们</a></span>
+        <span><a href="#">加入我们</a></span>
+        <span><a href="#">联系我们</a></span>
+    </div>
+</footer>
+</html>

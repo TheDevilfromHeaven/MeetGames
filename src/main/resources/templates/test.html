@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <style>
+        #box{
+            width:100px;
+            height:100px;
+            background-color:red;
+            position: absolute;
+        }
+    </style>
+</head>
+<body style="overflow-x:hidden">
+<div id="box"></div>
+<script type="text/javascript">
+        var oDiv = document.getElementById("box");
+        var divX = 0;
+        var divY = 0;
+
+        var x = getCookie('x');
+	    var y = getCookie("y");
+
+	    if(x){
+		    oDiv.style.left=x+'px';
+		    oDiv.style.top=y+'px';
+	    }
+
+        oDiv.onmousedown = function(ev){
+            var ev = ev || window.event;
+            disX=ev.clientX-oDiv.offsetLeft;
+		    disY=ev.clientY-oDiv.offsetTop;
+
+            document.onmousemove = function(ev){
+                var ev = ev || window.event;
+                oDiv.style.left=ev.clientX-disX+'px';
+			    oDiv.style.top=ev.clientY-disY+'px';
+            }
+
+            document.onmouseup=function (){
+			    document.onmousemove=null;
+			    document.onmouseup=null;
+
+			    if(oDiv.offsetLeft < 0){
+			        oDiv.style.left = 0 + "px";
+			    }else if(oDiv.offsetLeft + oDiv.offsetWidth > window.innerWidth){
+			        oDiv.style.left = window.innerWidth - oDiv.offsetWidth + "px";
+			    }
+
+			    if(oDiv.offsetTop < 0){
+			        oDiv.style.top = 0 + "px";
+			    }
+
+			    setCookie('x', oDiv.offsetLeft, 5);
+			    setCookie('y', oDiv.offsetTop, 5);
+		    }
+
+		    return false;
+        }
+
+        function setCookie(name, value, seconds) {
+            seconds = seconds || 0;   //seconds有值就直接赋值，没有为0，这个根php不一样。
+            var expires = "";
+            if (seconds != 0 ) {      //设置cookie生存时间
+                var date = new Date();
+                date.setTime(date.getTime()+(seconds*1000));
+                expires = "; expires="+date.toGMTString();
+            }
+            document.cookie = name+"="+escape(value)+expires+"; path=/";   //转码并赋值
+        }
+
+        // 取得cookie
+        function getCookie(name) {
+        var nameEQ = name + '='
+        var ca = document.cookie.split(';') // 把cookie分割成组
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i] // 取得字符串
+                while (c.charAt(0) == ' ') { // 判断一下字符串有没有前导空格
+                c = c.substring(1, c.length) // 有的话，从第二位开始取
+            }
+            if (c.indexOf(nameEQ) == 0) { // 如果含有我们要的name
+                return unescape(c.substring(nameEQ.length, c.length)) // 解码并截取我们要值
+            }
+        }
+        return false
+        }
+    </script>
+
+<div id="dandao">
+    <span class="danmu" style="position:absolute;">我是一条弹幕！！！</span>
+    <span class="danmu" style="position:absolute;top:20px;"></span>
+</div>
+<div>
+    <input id="danmuEditingArea" style="width:200px;height:20px" placeholder="请在此处输入弹幕..." maxlength="12">
+    <input id="add" type="button" value="添加弹幕" onclick="addDanmu()">
+</div>
+<script type="text/javascript">
+    var danmuPool = new Array();
+    danmuPool.push("我是第二条弹幕！！！");
+
+    var dandao = document.getElementById("dandao");
+    dandao.style.width = window.innerWidth + "px";
+    var danmu;
+    var setDanmu = setDanmu();
+    var time;
+    window.randomTime();
+    var run = window.setInterval("test()",1100/time);
+
+    for(var i = 0;i < danmu.length;i++){
+        console.log(i);
+    }
+
+    function test(){
+        danmu[0].style.left = danmu[0].offsetLeft - 1 +'px';
+        if(danmu[0].offsetLeft <= -danmu[0].offsetWidth){
+            var stop = window.clearInterval(run);
+            danmu[0].removeAttribute("style");
+            danmu[0].innerHTML = "";
+            if(danmuPool.length != 0){
+                window.newDanmu();
+                var setDanmu;
+                window.randomTime();
+                var run;
+            }
+        }
+    }
+
+    function setDanmu(){
+        danmu = document.getElementsByClassName("danmu");
+        danmu[0].style.width = danmu[0].offsetWidth + "px";
+        danmu[0].style.left = window.innerWidth + danmu[0].offsetWidth + "px";
+    }
+
+    function newDanmu(){
+        var newDanmu = document.getElementsByClassName("danmu");
+        newDanmu[0].innerHTML = danmuPool.shift();
+        newDanmu[0].style.position = "absolute";
+        newDanmu[0].style.width = newDanmu[0].offsetWidth + "px";
+        newDanmu[0].style.left = window.innerWidth + newDanmu[0].offsetWidth + "px";
+    }
+
+    function addDanmu(){
+        var danmuEditingArea = document.getElementById("danmuEditingArea");
+        if(danmu[0].innerHTML == ""){
+            danmuPool.push(danmuEditingArea.value);
+            window.newDanmu();
+            var setDanmu;
+            window.randomTime();
+            var run;
+        }else{
+            danmuPool.push(danmuEditingArea.value);
+        }
+    }
+
+    function randomTime(){
+        time = (Math.random()+ 0.1)*1000;
+    }
+</script>
+</body>
+</html>
